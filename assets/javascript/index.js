@@ -63,3 +63,11 @@ function checkSuffix(hour) {
 
 function convertTime(hour) { return moment(hour, 'HH').format('h'); }
 
+containerElement.on("click", "button", (event) => {
+    let Button = $(event.target)
+    let buttonHour = Button.data("hour")
+    let hourTextArea = $(`textarea[data-textHour=${buttonHour}]`, containerElement);
+    
+    todayStorage[buttonHour] = hourTextArea.val()
+    localStorage.setItem(currentTime.format("MMMM Do, YYYY"), JSON.stringify(todayStorage))
+})
