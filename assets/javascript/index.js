@@ -6,7 +6,7 @@ let currentHour = currentTime.format("H")
 timeElement.text(currentTime.format("dddd, MMMM Do"))
 
 let eventObject = {
-    9: "taco",
+    9: "",
     10: "",
     11: "",
     12: "",
@@ -18,8 +18,12 @@ let eventObject = {
 }
 
 let todayStorage = JSON.parse(localStorage.getItem(currentTime.format("MMMM Do, YYYY")))
-if(!todayStorage) localStorage.setItem(currentTime.format("MMMM Do, YYYY"), JSON.stringify(eventObject))
+if(!todayStorage) {
+    localStorage.setItem(currentTime.format("MMMM Do, YYYY"), JSON.stringify(eventObject))
+    todayStorage = JSON.parse(localStorage.getItem(currentTime.format("MMMM Do, YYYY")))
+}
 
+console.log(todayStorage)
 for (let i = 9; i < 18; i++) {
     if(i == currentHour) {
         addTimeBlock("present", i)
@@ -31,7 +35,6 @@ for (let i = 9; i < 18; i++) {
         addTimeBlock("future", i)
     }
 }
-
 
 function addTimeBlock(tense, hour) {
     let timeBlockElement = $("<div>")
@@ -62,6 +65,7 @@ function checkSuffix(hour) {
 }
 
 function convertTime(hour) { return moment(hour, 'HH').format('h'); }
+
 
 containerElement.on("click", "button", (event) => {
     let Button = $(event.target)
