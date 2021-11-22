@@ -23,7 +23,6 @@ if(!todayStorage) {
     todayStorage = JSON.parse(localStorage.getItem(currentTime.format("MMMM Do, YYYY")))
 }
 
-console.log(todayStorage)
 for (let i = 9; i < 18; i++) {
     if(i == currentHour) {
         addTimeBlock("present", i)
